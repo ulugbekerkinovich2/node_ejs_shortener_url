@@ -1,0 +1,8 @@
+Ushbu loyihada url manzillarni qisqa nom bilan yo'naltirib beruvchi dastur yozilgan. 
+
+// http://localhost:4545/longUrl
+ushbu manzil orqali kiriladi va safihaga uzun link kiriladi va enter bosiladi va Original url va Short url safihada ko'rsatib beriadi
+
+-shu bilan birga ishlatilgan qisqa va uzun linklar json file ga yozib boriladi.
+
+-Short url ga murojat qilinganda long urlga yonaltirib beriadi.
