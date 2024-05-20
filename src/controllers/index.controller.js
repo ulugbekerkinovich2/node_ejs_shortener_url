@@ -5,7 +5,6 @@ const config = require("../../config/index");
 const PORT = config.port;
 const postUrl = async (req, res) => {
   const urlDatabase = await urlsDB.read();
-
   const longUrl = req.body.longUrl;
   const shortUrl = Math.random().toString(36).substring(2, 8);
 
