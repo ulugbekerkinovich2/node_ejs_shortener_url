@@ -110,6 +110,21 @@
       </div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-675EHCMX0X"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-675EHCMX0X");
+    </script>
   </head>
 
   <body>
@@ -124,8 +139,8 @@
         />
         <button type="submit">Shorten</button>
       </form>
-      <% if (typeof shortUrl !=='undefined' && typeof longUrl !=='undefined' ) {
-      %>
+      <% if (typeof shortUrl !== 'undefined' && typeof longUrl !== 'undefined')
+      { %>
       <div class="short-url">
         <p>Short URL: <a href="<%= shortUrl %>"> <%= shortUrl %> </a></p>
       </div>
