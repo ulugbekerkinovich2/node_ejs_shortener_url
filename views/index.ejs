@@ -1,53 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URL Shortener</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-        .container {
-            text-align: center;
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        input {
-            padding: 0.5rem;
-            width: 80%;
-            margin-bottom: 1rem;
-        }
-        button {
-            padding: 0.5rem 1rem;
-        }
-        .short-url, .long-url {
-            margin-top: 1rem;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: url("background.jpg") no-repeat center center fixed;
+        background-size: cover;
+      }
+
+      .container {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 400px;
+      }
+
+      h1 {
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      input {
+        padding: 0.5rem;
+        width: calc(100% - 1rem);
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        padding: 0.5rem 1rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .short-url,
+      .long-url {
+        margin-top: 1rem;
+        word-wrap: break-word;
+      }
+
+      .short-url a {
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      .short-url a:hover {
+        text-decoration: underline;
+      }
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
     <div class="container">
-        <h1>URL Shortener</h1>
-        <form action="/" method="POST">
-            <input type="url" name="longUrl" placeholder="Enter long URL" required>
-            <button type="submit">Shorten</button>
-        </form>
-        <% if (typeof shortUrl !== 'undefined' && typeof longUrl !== 'undefined') { %>
-        <div class="short-url">
-            <p>Short URL: <a href="<%= shortUrl %>"><%= shortUrl %></a></p>
-        </div>
-        <div class="long-url">
-            <p>Original URL: <%= longUrl %></p>
-        </div>
-        <% } %>
+      <h1>URL Shortener</h1>
+      <form action="/" method="POST">
+        <input
+          type="url"
+          name="longUrl"
+          placeholder="Enter long URL"
+          required
+        />
+        <button type="submit">Shorten</button>
+      </form>
+      <% if (typeof shortUrl !=='undefined' && typeof longUrl !=='undefined' ) {
+      %>
+      <div class="short-url">
+        <p>Short URL: <a href="<%= shortUrl %>"> <%= shortUrl %> </a></p>
+      </div>
+      <div class="long-url">
+        <p>Original URL: <%= longUrl %></p>
+      </div>
+      <% } %>
     </div>
-</body>
+  </body>
 </html>
