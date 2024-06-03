@@ -12,7 +12,7 @@ const postUrl = async (req, res) => {
   urlDatabase.push({ shortUrl, longUrl });
   await urlsDB.write(urlDatabase);
   res.render("index", {
-    shortUrl: `http://localhost:${PORT}/${shortUrl}`,
+    shortUrl: `https://urlshortener.uz/${shortUrl}`,
     longUrl,
   });
 };
