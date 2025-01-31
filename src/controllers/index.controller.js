@@ -9,6 +9,8 @@ const postUrl = async (req, res) => {
   const shortUrl = Math.random().toString(36).substring(2, 8);
 
   urlDatabase[shortUrl] = longUrl;
+  console.log(shortUrl, longUrl);
+  
   urlDatabase.push({ shortUrl, longUrl });
   await urlsDB.write(urlDatabase);
   res.render("index", {
