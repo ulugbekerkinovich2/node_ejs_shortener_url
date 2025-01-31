@@ -3,16 +3,46 @@ const urlsDB = new Io(`${process.cwd()}/database/urls.json`);
 const config = require("../../config/index");
 
 const PORT = config.port;
+// const postUrl = async (req, res) => {
+//   const urlDatabase = await urlsDB.read();
+//   const longUrl = req.body.longUrl;
+//   const shortUrl = Math.random().toString(36).substring(2, 8);
+
+//   urlDatabase[shortUrl] = longUrl;
+//   console.log(shortUrl, longUrl);
+  
+//   urlDatabase.push({ shortUrl, longUrl });
+//   await urlsDB.write(urlDatabase);
+//   res.render("index", {
+//     shortUrl: `https://urlshortener.uz/${shortUrl}`,
+//     longUrl,
+//   });
+// };
 const postUrl = async (req, res) => {
-  const urlDatabase = await urlsDB.read();
+  let urlDatabase = await urlsDB.read();
+
+  // Ensure `urlDatabase` is an array
+  if (!Array.isArray(urlDatabase)) {
+    urlDatabase = [];
+  }
+
   const longUrl = req.body.longUrl;
   const shortUrl = Math.random().toString(36).substring(2, 8);
 
-  urlDatabase[shortUrl] = longUrl;
-  console.log(shortUrl, longUrl);
-  
-  urlDatabase.push({ shortUrl, longUrl });
-  await urlsDB.write(urlDatabase);
+  console.log("Saving Short URL:", shortUrl, "Long URL:", longUrl);
+
+  // Ensure URL is not duplicated
+  const exists = urlDatabase.some((url) => url.shortUrl === shortUrl);
+  if (!exists) {
+    // Add new short-long URL pair
+    urlDatabase.push({ shortUrl, longUrl });
+
+    // Write updated data back to `urls.json`
+    await urlsDB.write(urlDatabase);
+  } else {
+    console.log("⚠️ Short URL already exists, skipping.");
+  }
+
   res.render("index", {
     shortUrl: `https://urlshortener.uz/${shortUrl}`,
     longUrl,
