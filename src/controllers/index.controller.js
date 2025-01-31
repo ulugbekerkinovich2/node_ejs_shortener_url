@@ -19,15 +19,33 @@ const postUrl = async (req, res) => {
   });
 };
 
+// const getUrl = async (req, res) => {
+//   const urlDatabase = await urlsDB.read();
+//   const shortUrl = req.params.shortUrl;
+//   longUrl = urlDatabase.find((url) => url.shortUrl === shortUrl);
+//   longUrl = longUrl?.longUrl;
+//   console.log(longUrl);
+//   if (longUrl) {
+//     console.log(longUrl, "bu1 long url");
+//     res.redirect(longUrl);
+//   } else {
+//     res.status(404).send("URL not found err");
+//   }
+// };
 const getUrl = async (req, res) => {
-  const urlDatabase = await urlsDB.read();
+  let urlDatabase = await urlsDB.read();
+
+  // Ensure `urlDatabase` is an array
+  if (!Array.isArray(urlDatabase)) {
+    urlDatabase = [];  // Initialize as an empty array if needed
+  }
+
   const shortUrl = req.params.shortUrl;
-  longUrl = urlDatabase.find((url) => url.shortUrl === shortUrl);
-  longUrl = longUrl?.longUrl;
-  console.log(longUrl);
-  if (longUrl) {
-    console.log(longUrl, "bu1 long url");
-    res.redirect(longUrl);
+  const foundUrl = urlDatabase.find((url) => url?.shortUrl === shortUrl); // Safe lookup
+
+  if (foundUrl) {
+    console.log(foundUrl.longUrl, "bu1 long url");
+    res.redirect(foundUrl.longUrl);
   } else {
     res.status(404).send("URL not found err");
   }
